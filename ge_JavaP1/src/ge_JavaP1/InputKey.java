@@ -33,7 +33,7 @@ public class InputKey {
         		System.out.println("ERROR->何も入力されていません。");
         		continue;
         	}
-        	for(int i=0;i<str.length()-1;i++) {
+        	for(int i=0;i<str.length();i++) {
         		one_char[i]=str.charAt(i);//文字列を一文字ずつ格納
         		if(!Character.isDigit(one_char[i])) {
         			System.out.println("ERROR->"+one_char[i]+"は文字です。");
