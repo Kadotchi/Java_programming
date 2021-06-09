@@ -25,6 +25,8 @@ public class FileLoading {
         } catch (IOException ex) {
             //例外発生時処理
             ex.printStackTrace();
+        }catch (Exception e) {
+        	 
         }
     }
 

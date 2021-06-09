@@ -7,7 +7,11 @@ public class Referee {
 		this.count=0;
 	}
 	
-	public boolean judg(int user_num,int cpu_num,int range) {
+	public boolean judg(User user,Cpu cpu) {
+		int user_num=user.getNum();
+		int range=user.getRange();
+		int cpu_num=cpu.getNum();
+		
 		System.out.println("ユーザーから数字を聞きました。"+user_num);
 		System.out.println("CPUから数字を聞きました。"+cpu_num);
 		

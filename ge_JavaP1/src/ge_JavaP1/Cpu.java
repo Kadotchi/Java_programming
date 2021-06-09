@@ -5,6 +5,10 @@ import java.util.Random;
 public class Cpu {
 	private int num;
 	
+	public Cpu() {
+		
+	}
+	
 	public void setNum() {
 		Random rand=new Random();
 		this.num=rand.nextInt(100);
