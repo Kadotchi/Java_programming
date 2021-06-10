@@ -1,4 +1,6 @@
 package ge_JavaP1;
+import num.game.logics.NumGame;
+
 
 public class Main {
 	
@@ -9,3 +11,4 @@ public class Main {
 	}
 	
 }
+

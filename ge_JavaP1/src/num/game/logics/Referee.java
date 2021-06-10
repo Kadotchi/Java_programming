@@ -1,4 +1,4 @@
-package ge_JavaP1;
+package num.game.logics;
 
 public class Referee {
 	private int count;
