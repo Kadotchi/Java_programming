@@ -1,0 +1,75 @@
+@startuml
+HighGame .> FileLoading :ルールの表示
+ge_JavaP3 o-- HighGame :New
+HighGame o-- User :New
+HighGame o-- Dealer :New
+
+User <.> Dealer :　　　　　　
+
+note right of  Constants
+定数
+end note
+
+
+Dealer o--Trump : New
+class Constants [[java:jp.geng.kadoshima.Constants]] {
+	+{static} TRUMP_NUMBER: int
+	+{static} TRUMP_STRENGTH: int
+	+{static} TRUMP_MARK: int
+	+{static} FIRST_POS_MONEY: int
+	+{static} END_POD_MONEY: int
+}
+class Dealer [[java:jp.geng.kadoshima.Dealer]] {
+	-bet_money: int
+	-div_money: int
+	-count: int
+	+Dealer()
+	+setBetMoney(bet_money: int): void
+	+deck_print(): void
+	+deck_shuffle(): void
+	+judgement(): boolean
+	+divCalc(): void
+	+divDeal(user: User): void
+	+now_card_print(): void
+	+card_draw(): void
+	+getCount(): int
+}
+class Trump {
+}
+class Trump {
+}
+class Trump {
+}
+class Trump {
+}
+class FileLoading [[java:jp.geng.kadoshima.FileLoading]] {
+	+{static} rule(path: String): void
+}
+class ge_JavaP3 [[java:jp.geng.kadoshima.ge_JavaP3]] {
+	+{static} main(args: String[]): void
+}
+class HighGame [[java:jp.geng.kadoshima.HighGame]] {
+	+start(): void
+}
+class Trump [[java:jp.geng.kadoshima.Trump]] {
+	-{static} MARK: String[]
+	-{static} NUM: String[]
+	-value: int
+	-mark_num: int
+	+Trump(mark: int, num: int)
+	+getValue(): int
+	+getMarkNum(): int
+	+stats_print(): void
+}
+class User [[java:jp.geng.kadoshima.User]] {
+	-money: int
+	-scanner: Scanner
+	+User()
+	+letPay(dealer: Dealer): void
+	+bet(): boolean
+	+getMoney(): int
+	+getDivMoney(div_money: int): void
+	+inputKeyNum(max: int, min: int): int
+	+revenge(): boolean
+}
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+class Janken [[java:Janken]] {
+	+Janken()
+	+doJudge(user: User, computer: Computer): void
+}
+class User [[java:User]] {
+}
+Janken --> "1" User : user
+class Computer [[java:Computer]] {
+}
+Janken --> "1" Computer : computer
+class Judge [[java:Judge]] {
+}
+Janken --> "1" Judge : judge
+class Human [[java:Human]] {
+	-hand: int
+	+setHand(): void
+	+getHand(): int
+}
+
+@enduml

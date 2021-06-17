@@ -1,0 +1,66 @@
+
+Referee --|>Cpu:数字獲得
+Main <-- FileLoading:ルールの表示
+NumGame ...> User:数字作成命令
+NumGame ...> Cpu : 数字作成命令
+NumGame ...> Referee : 数字作成命令
+User -- InputKey :数字獲得
+@startuml
+
+InputKey - ConstNumGame:定数
+Main o-- NumGame :new
+NumGame o-- Referee : new
+NumGame o-- User:new
+NumGame o-- Cpu : new
+Referee .> User:数字獲得
+Cpu <. Referee :数字獲得
+User ..> InputKey :キーボード入力
+NumGame .> FileLoading:ルールの表示
+
+note right of  ConstNumGame
+定数
+end note
+
+
+class ConstNumGame [[java:ge_JavaP1.ConstNumGame]] {
+	+{static} MAXNUM: int
+}
+class Cpu [[java:ge_JavaP1.Cpu]] {
+	-num: int
+	+Cpu()
+	+setNum(): void
+	+getNum(): int
+}
+class FileLoading [[java:ge_JavaP1.FileLoading]] {
+	+{static} rule(path: String): void
+}
+class InputKey [[java:ge_JavaP1.InputKey]] {
+	+{static} num(max: int, min: int): int
+}
+class Main [[java:ge_JavaP1.Main]] {
+	+{static} main(args: String[]): void
+}
+class NumGame [[java:ge_JavaP1.NumGame]] {
+	+NumGame()
+	+start(): void
+}
+
+
+class Referee [[java:ge_JavaP1.Referee]] {
+	-count: int
+	+initCount(): void
+	+judg(user: User, cpu: Cpu): boolean
+}
+
+class User [[java:ge_JavaP1.User]] {
+	-num: int
+	-range: int
+	+setNum(): void
+	+setRange(): void
+	+getNum(): int
+	+getRange(): int
+}
+
+
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+title 数字当てゲーム
+
+participant "Main" as Main
+participant "数字当てゲーム" as Num_game
+participant "利用者" as User
+participant "コンピュータ" as Cpu
+participant "審判" as Judge
+
+
+
+activate Main
+	create Num_game
+	Main -> Num_game : new
+	activate Num_game
+		create User
+		Num_game->User:New
+		create Cpu
+		Num_game->Cpu:New
+		create Judge
+		Num_game->Judge:New
+	deactivate Num_game
+
+	Main->Num_game:実行
+	activate Num_game
+		Num_game->Cpu:数字作成命令
+		activate Cpu
+		deactivate Cpu
+		loop
+			Num_game->User:数字作成命令
+			activate User
+			deactivate User
+			Num_game->Judge:判定命令
+			activate Judge
+				Judge->Cpu:数字獲得
+				activate Cpu
+					Cpu-->Judge:数字
+				deactivate Cpu
+				Judge->User:数字獲得
+				activate User
+					User-->Judge:数字
+				deactivate User
+				Judge-->Num_game:判定結果
+			deactivate Judge
+			Num_game-->Main:終了
+	deactivate Num_game		
+		end
+deactivate Main
+
+@enduml

@@ -1,0 +1,84 @@
+activate
+deactivate
+@startuml
+title ハイゲーム
+
+participant "Main" as Main
+participant "<ハイゲーム>\nHighGame" as HighGame
+participant "<利用者>\nUser" as User
+participant "<親>\nDealer" as Dealer
+participant "<トランプ>\ntrump" as Trump
+
+
+activate Main
+	create HighGame
+	Main -> HighGame : new
+deactivate Main
+activate HighGame
+	create User
+	HighGame->User:New
+	create Dealer
+	HighGame->Dealer:New
+	activate Dealer
+		create Trump
+		Dealer->Trump:New
+	deactivate Dealer
+deactivate HighGame
+
+Main -> HighGame : start()
+activate Main
+	activate HighGame
+		HighGame -> Dealer :デッキセット命令
+		activate Dealer
+		Dealer -> Trump : デッキセット
+		activate Trump
+		deactivate Dealer
+		deactivate Trump
+		
+	
+		loop 0<所持金 && 所持金<=1000
+			HighGame -> User :支払い命令
+			activate User
+				User -> Dealer :掛け金支払い
+				activate Dealer
+				deactivate User
+			deactivate Dealer
+		loop 負けるか降りるまで
+					HighGame -> User :賭けますか？
+					activate User
+					HighGame <-- User :賭けますか？
+					deactivate User
+			alt 賭ける
+				HighGame -> Dealer : 判定
+					activate Dealer
+						Dealer -> Trump : 次のカードちょうだい
+						activate Trump
+							Trump --> Dealer : 次のカード渡す
+						deactivate Trump		
+							Dealer --> HighGame : 判定結果
+					deactivate Dealer
+				alt 勝った
+				 	HighGame -> Dealer :配当金計算命令
+					activate Dealer
+				 	deactivate Dealer
+			 	else 負ける
+			 	
+				end
+				else 降りる
+						Dealer -> User :配当金
+				activate Dealer
+				activate User
+				deactivate User
+				deactivate Dealer
+			end				
+		end 
+	end
+	
+	HighGame --> Main :終了
+	
+deactivate Main
+
+			deactivate HighGame
+deactivate Main
+
+@enduml

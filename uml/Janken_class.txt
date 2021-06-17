@@ -1,0 +1,26 @@
+@startuml
+JankenMain o-- Janken :new
+Janken o--  User : new
+Janken o--  Computer : new
+Janken o--  Judge : new
+Human <|-- Computer :継承
+Human <|-- User :継承
+
+
+class Janken [[java:Janken]] {
+	+Janken()
+	+doJudge(user: User, computer: Computer): void
+}
+class User [[java:User]] {
+}
+class Computer [[java:Computer]] {
+}
+class Judge [[java:Judge]] {
+}
+class Human [[java:Human]] {
+	-hand: int
+	+setHand(): void
+	+getHand(): int
+}
+
+@enduml

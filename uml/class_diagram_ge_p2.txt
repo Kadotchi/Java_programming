@@ -1,0 +1,174 @@
+NumGame2 --> "1" User2 : user
+NumGame2 --> "1" Cpu2 : cpu
+NumGame2 --> "1" Referee2 : referee
+User <|-- User2
+Referee <|-- Referee2
+@startuml
+
+Main o-- NumGame2
+NumGame2 .> FileLoading:ルールの表示
+NumGame2 o---- User2 : new
+NumGame2 o---- Referee2 : new
+NumGame2 o----  Cpu2 : new
+
+Referee <|-- Referee2 :継承
+Cpu2 <. Referee2 :数値情報
+Referee2 .> User2 :数値情報
+ 
+User <|-- User2 :継承
+
+note right of  ConstNumGame
+定数
+end note
+
+
+class Main [[java:ge_Javap2.Main]] {
+	+{static} main(args: String[]): void
+}
+class FileLoading [[java:num.game.logics.FileLoading]] {
+	+{static} rule(path: String): void
+}
+class Referee2 [[java:num.game.logics.Referee2]] {
+	-user_num: int
+	-user_num_colum: int[]
+	-user_duplicate_confirmation: boolean[]
+	-cpu_num_colum: int[]
+	-cpu_duplicate_confirmation: boolean[]
+	-conp_duplicate_count: int
+	-duplicate_count: int
+	+init(): void
+	+judg(user: User2, cpu: Cpu2): boolean
+}
+class Referee {
+}
+class Cpu2 [[java:num.game.logics.Cpu2]] {
+	-num: int
+	-num_colum: int[]
+	-duplicate_confirmation: boolean[]
+	~rand: Random
+	+Cpu2()
+	+init(): void
+	+setNum(): void
+	+getNum(): int
+	+getNumColum(): int[]
+	+getDuplicateConfirmation(): boolean[]
+}
+class Referee [[java:num.game.logics.Referee]] {
+	+count: int
+	+initCount(): void
+	+getCount(): int
+}
+class NumGame2 [[java:num.game.logics.NumGame2]] {
+	~rule_file: String
+	~num_check_flag: boolean
+	+NumGame2()
+	+start(): void
+}
+class User2 {
+}
+class Cpu2 {
+}
+class Referee2 {
+}
+class User [[java:num.game.logics.User]] {
+	-num: int
+	-range: int
+	+getNum(): int
+	+getRange(): int
+}
+class User2 [[java:num.game.logics.User2]] {
+	-num: int
+	-num_colum: int[]
+	-num_string: String
+	-duplicate_confirmation: boolean[]
+	+User2()
+	+init(): void
+	+inputKeyNum(digits: int): void
+	+inputKeyNum(max: int, min: int, digits: int): int
+	+num_check(): boolean
+	+getNum(): int
+	+getNumColum(): int[]
+	+getDuplicateConfirmation(): boolean[]
+}
+class User {
+}
+class ConstNumGame [[java:num.game.logics.ConstNumGame]] {
+	+{static} MAXNUM: int
+	+{static} ISDIZIT: int
+	+{static} NUM_GAME2_MAXNUM: int
+	-ConstNumGame()
+}
+class FileLoading [[java:num.game.logics.FileLoading]] {
+	+{static} rule(path: String): void
+}
+class Referee2 [[java:num.game.logics.Referee2]] {
+	-user_num: int
+	-user_num_colum: int[]
+	-user_duplicate_confirmation: boolean[]
+	-cpu_num_colum: int[]
+	-cpu_duplicate_confirmation: boolean[]
+	-conp_duplicate_count: int
+	-duplicate_count: int
+	+init(): void
+	+judg(user: User2, cpu: Cpu2): boolean
+}
+class Referee {
+}
+class Cpu2 [[java:num.game.logics.Cpu2]] {
+	-num: int
+	-num_colum: int[]
+	-duplicate_confirmation: boolean[]
+	~rand: Random
+	+Cpu2()
+	+init(): void
+	+setNum(): void
+	+getNum(): int
+	+getNumColum(): int[]
+	+getDuplicateConfirmation(): boolean[]
+}
+class Referee [[java:num.game.logics.Referee]] {
+	+count: int
+	+initCount(): void
+	+getCount(): int
+}
+class NumGame2 [[java:num.game.logics.NumGame2]] {
+	~rule_file: String
+	~num_check_flag: boolean
+	+NumGame2()
+	+start(): void
+}
+class User2 {
+}
+class Cpu2 {
+}
+class Referee2 {
+}
+class User [[java:num.game.logics.User]] {
+	-num: int
+	-range: int
+	+getNum(): int
+	+getRange(): int
+}
+class User2 [[java:num.game.logics.User2]] {
+	-num: int
+	-num_colum: int[]
+	-num_string: String
+	-duplicate_confirmation: boolean[]
+	+User2()
+	+init(): void
+	+inputKeyNum(digits: int): void
+	+inputKeyNum(max: int, min: int, digits: int): int
+	+num_check(): boolean
+	+getNum(): int
+	+getNumColum(): int[]
+	+getDuplicateConfirmation(): boolean[]
+}
+class User {
+}
+class ConstNumGame [[java:num.game.logics.ConstNumGame]] {
+	+{static} MAXNUM: int
+	+{static} ISDIZIT: int
+	+{static} NUM_GAME2_MAXNUM: int
+	-ConstNumGame()
+}
+@enduml

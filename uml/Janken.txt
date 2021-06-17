@@ -1,0 +1,47 @@
+@startuml
+title じゃんけんゲーム
+
+participant JankenMain
+participant Janken
+participant User
+participant Computer
+participant Judge
+
+activate JankenMain
+	create Janken
+	JankenMain -> Janken : new
+	activate Janken
+		create User
+		Janken -> User :New
+		create Computer
+		Janken -> Computer :New
+		create Judge
+		Janken -> Judge :New
+	deactivate Janken 
+	JankenMain -> Janken :play'()
+	loop 勝負つくまで
+	activate Janken
+		Janken-> User :setHand()
+		activate User
+		deactivate User
+		
+		Janken-> Computer :setHand()
+		activate Computer
+		deactivate Computer
+		
+		Janken-> Judge :doJudge(User,Computer)
+		activate Judge
+			User <- Judge :getHand()
+			activate User
+				User --> Judge :hand
+			deactivate User
+			
+			
+			Computer <- Judge :getHand()
+			activate Computer
+				Computer --> Judge :hand
+			deactivate Computer
+		deactivate Judge
+	end
+deactivate JankenMain
+@enduml

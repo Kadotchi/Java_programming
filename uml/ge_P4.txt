@@ -1,0 +1,52 @@
+activate
+deactivate
+@startuml
+title 電車でGO　or　月面着陸ゲーム
+
+participant "Main" as main
+participant "<ゲーム>\nGame" as game
+participant "<運転手>\nDriver" as driver
+participant "<電車>\nTrain" as train
+participant "<ロケット>\nRocket" as rocket
+
+activate main
+	activate game
+	create game
+	main -> game :New
+	create driver
+	game -> driver :New
+	
+	main -> game :start()
+	loop もう一度
+		game -> game :mode()
+		alt 電車
+			create train
+			game -> train :New
+			game -> train :進行命令
+			activate train
+				loop 停止まで
+					train -> driver :操作命令
+					activate driver
+						driver -> train :操作
+					deactivate driver
+				end
+				train --> game :停止
+			deactivate train
+		else ロケット
+			create rocket
+			game -> rocket :New
+			game -> rocket :進行命令
+			activate rocket
+				loop 停止まで
+					rocket -> driver :操作命令
+					activate driver
+						driver -> rocket :操作
+					deactivate driver
+				end
+				rocket --> game :停止
+			deactivate rocket
+		end
+	end
+	game --> main :終了
+
+@enduml
