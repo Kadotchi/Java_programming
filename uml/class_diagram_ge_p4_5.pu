@@ -1,0 +1,71 @@
+@startuml
+Main o-- Game :New
+Game o-- Driver : New
+Game o-- Vehicle : New
+Vehicle <|-- Rocket :継承
+Vehicle <|-- Train :継承
+Driver - Vehicle
+class Driver [[java:jp.geng.kadoshima.Driver]] {
+	~scanner: Scanner
+	+Driver()
+	+inputKeyNum(max: int, min: int): int
+	+operation(max: int, min: int): int
+	+mode(): int
+	+revenge(): boolean
+}
+class Game [[java:jp.geng.kadoshima.Game]] {
+	+start(): void
+	+{static} rule(path: String): void
+}
+class Driver {
+}
+class Vehicle {
+}
+class Main [[java:jp.geng.kadoshima.Main]] {
+	+{static} main(args: String[]): void
+}
+class Rocket [[java:jp.geng.kadoshima.Rocket]] {
+	-{static} UNIT_MAXIMUM: int
+	+{static} INITDISTANCE: int
+	+{static} ENDDISTANCE: int
+	-file: int
+	-isLandingSuccess: boolean
+	+Rocket()
+	+setBreaks(driver: Driver): void
+	+setDistance(): void
+	+setSpeed(): void
+	+statDisplay(): void
+}
+class Vehicle {
+}
+class Train [[java:jp.geng.kadoshima.Train]] {
+	+{static} MAXBREAKS: int
+	+{static} ENDDISTANCE: int
+	+{static} INITDISTANCE: int
+	+Train()
+	+setBreaks(driver: Driver): void
+	+setDistance(): void
+	+setSpeed(): void
+	+statDisplay(): void
+}
+class Vehicle {
+}
+abstract class Vehicle [[java:jp.geng.kadoshima.Vehicle]] {
+	-COLUMN: int
+	+INITDISTANCE: int
+	~distance: double
+	~speed: double
+	~brake: int
+	~time: int
+	~isGo: boolean
+	~endDistance: int
+	~body: char[]
+	+Vehicle()
+	+start(driver: Driver): void
+	+Display(body: char[]): void
+	+{abstract} setBreaks(driver: Driver): void
+	+{abstract} setDistance(): void
+	+{abstract} setSpeed(): void
+	+{abstract} statDisplay(): void
+}
+@enduml

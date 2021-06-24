@@ -30,7 +30,6 @@ public class Driver {
 				return num;
 			}catch(NumberFormatException e) {
 				System.out.println("ERROR->入力が不正です。もう一度。");
-				continue;
 			}
 		}
 	}
@@ -39,33 +38,24 @@ public class Driver {
 		int num;
 		String num_string; 
 		
-		while(true) {
-			try {
-				System.out.println("数字を入力してください。");
-				num_string=scanner.nextLine();
-				if(num_string.contains("+")||num_string.contains("-")) {
-					System.out.println("ERROR->+や-などの符号入力しないでください。");
-					return 0;
-				}
-				System.out.println("入力された数値は"+num_string+"です。");
-				num = Integer.parseInt(num_string);
-				if(!(min<=num&&num<=max)) {
-					System.out.println("ERROR->数値の範囲が超えています");
-					return 0;
-				}
-				if(num==2) {
-					return 1;
-				}else if(num==1) {
-					return -1;
-				}else {
-					//System.out.println("何かがおかしい");
-				}
-				
-				return num;
-			}catch(NumberFormatException e) {
-				System.out.println("ERROR->入力が不正です。もう一度。");
+		try {
+			System.out.println("数字を入力してください。");
+			num_string=scanner.nextLine();
+			if(num_string.contains("+")||num_string.contains("-")) {
+				System.out.println("ERROR->+や-などの符号入力しないでください。");
 				return 0;
 			}
+			System.out.println("入力された数値は"+num_string+"です。");
+			num = Integer.parseInt(num_string);
+			if(!(min<=num&&num<=max)) {
+				System.out.println("ERROR->数値の範囲が超えています");
+				return 0;
+			}
+			
+			return num;
+		}catch(NumberFormatException e) {
+			System.out.println("ERROR->入力が不正です。もう一度。");
+			return 0;
 		}
 	}
 	

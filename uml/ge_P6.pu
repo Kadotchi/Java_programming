@@ -1,0 +1,45 @@
+@startuml
+title 逆ポーランド電卓
+
+participant "Main" as main
+participant "<逆ポーランド電卓>\nreversePoland" as invPoland
+participant "<実行者>\nUser" as user
+participant "<演算機>\nCalculator" as calcu
+
+activate main
+	create invPoland
+	main -> invPoland :New
+	activate invPoland
+		create user
+		invPoland -> user :New
+		create calcu
+		invPoland -> calcu :New
+	deactivate invPoland
+deactivate main
+
+main -> invPoland :start()
+activate main
+	activate invPoland
+		loop OFFが入力されるまで
+			invPoland -> user :式の入力
+			activate user
+				invPoland <-- user :式
+			deactivate user
+			alt 式入力
+				invPoland -> calcu :計算命令
+				activate calcu
+					calcu --> invPoland :計算結果
+				deactivate calcu
+			else C
+				invPoland -> calcu :スタックの初期化命令
+				activate calcu
+				deactivate calcu
+			else OFF
+				invPoland --> main :終了
+	deactivate invPoland
+			end
+		end
+deactivate main
+
+
+@enduml
