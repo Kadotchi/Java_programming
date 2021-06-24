@@ -1,14 +1,20 @@
 package ge_JavaP6;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class User {
-	Scanner scanner;
-	Calculator calcu;
+	private Scanner scanner;
+	private String[] sArrayFormula;
+	private ArrayList<String> listFormula;
+	
 
 	
 	public User() {
-		scanner=new Scanner(System.in);
+		this.scanner=new Scanner(System.in);
+		//this.sArrayFormula=new String[];
+		this.listFormula=new ArrayList<>();
 	}
 	
 	public void calculator() {
@@ -26,7 +32,8 @@ public class User {
 	public boolean formula_entry() {
 		String sFormula;
 		String[] sArrayFormula;
-//		ArrayList<String> listFormula=new ArrayList<>();
+		long tmp;
+		//listFormulaの初期化
 		System.out.print("式を入力：");
 		//scanner.next();
 		sFormula=scanner.nextLine();
@@ -34,8 +41,17 @@ public class User {
 		int i=0;
 		for(String s:sArrayFormula) {
 			System.out.println("sArrayFormula["+i+"]:"+s);
-//			listFormula.add(s);
+			listFormula.add(s);
+			try {
+				tmp=Long.parseLong(s);
+				
+			}catch(NumberFormatException e){
+				System.out.println("オーバーフロー");
+			}
 			i++;
+		}
+		for(String s : listFormula) {
+			System.out.println(s);
 		}
 		if(sArrayFormula[0].equals("OFF")) {
 			return false;
@@ -46,11 +62,12 @@ public class User {
 		//		System.out.println("入力をListにいれました。");
 //		scanner.close();
 //		//listの表示
-//		for(String s : listFormula) {
-//			System.out.println(s);
-//		}
 //		System.out.println("表示終わり");
 
+	}
+	
+	public ArrayList<String> getListFormula() {
+		return this.listFormula;
 	}
 	
 	
