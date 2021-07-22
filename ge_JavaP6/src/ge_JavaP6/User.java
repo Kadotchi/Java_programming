@@ -1,76 +1,32 @@
 package ge_JavaP6;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.regex.Pattern;
 
 public class User {
 	private Scanner scanner;
-	private String[] sArrayFormula;
-	private ArrayList<String> listFormula;
-	
-
 	
 	public User() {
-		this.scanner=new Scanner(System.in);
-		//this.sArrayFormula=new String[];
-		this.listFormula=new ArrayList<>();
+		this.scanner = new Scanner(System.in);
 	}
-	
-	public void calculator() {
-		
-		while(this.formula_entry()) {
-			//式チェック
-			System.out.println("計算します 。");
-//			this.formula_entry();
-//			this.formula_entry()
-//			calcu.start(this.sArrayFormula);
-		}
 
-	}
-	
-	public boolean formula_entry() {
+
+	public String[] formula_entry() {
 		String sFormula;
 		String[] sArrayFormula;
-		long tmp;
-		//listFormulaの初期化
+		Pattern p=Pattern.compile("[\s]+");//正規表現をコンパイル
 		System.out.print("式を入力：");
-		//scanner.next();
-		sFormula=scanner.nextLine();
-		sArrayFormula=sFormula.split(" ");
-		int i=0;
-		for(String s:sArrayFormula) {
-			System.out.println("sArrayFormula["+i+"]:"+s);
-			listFormula.add(s);
-			try {
-				tmp=Long.parseLong(s);
-				
-			}catch(NumberFormatException e){
-				System.out.println("オーバーフロー");
-			}
+		sFormula = scanner.nextLine();
+		System.out.println(sFormula);
+		sFormula = sFormula.trim();//文字列の先頭と最後から空白をとる
+		System.out.println(sFormula);
+		//sArrayFormula= p.split(sFormula);//半角スペースごとに分ける
+		sArrayFormula= sFormula.split("[\s]+");//半角スペースごとに分ける
+		int i = 0;
+		for (String s : sArrayFormula) {
+			System.out.println("sArrayFormula[" + i + "]:" + s);
 			i++;
 		}
-		for(String s : listFormula) {
-			System.out.println(s);
-		}
-		if(sArrayFormula[0].equals("OFF")) {
-			return false;
-		}else {
-			return true;
-		}
-		
-		//		System.out.println("入力をListにいれました。");
-//		scanner.close();
-//		//listの表示
-//		System.out.println("表示終わり");
-
+		return sArrayFormula;
 	}
-	
-	public ArrayList<String> getListFormula() {
-		return this.listFormula;
-	}
-	
-	
-	
-
 }

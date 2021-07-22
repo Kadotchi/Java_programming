@@ -1,0 +1,40 @@
+@startuml
+class Calculator [[java:ge_JavaP6.Calculator]] {
+	-STACKSIZE: int
+	-stack: long[]
+	-head: int
+	+Calculator()
+	+start(listFormula: ArrayList<String>): void
+	+push(num: long): void
+	+pop(): long
+	+overAddCheck(num1: long, num2: long): boolean
+	+overSubtractionCheck(num1: long, num2: long): boolean
+	+overMathCheck(num1: long, num2: long): boolean
+	+overDivisionCheck(num1: long, num2: long): boolean
+	+display_stack(): void
+	+init_stack(): void
+}
+class Main [[java:ge_JavaP6.Main]] {
+	+{static} main(args: String[]): void
+}
+Main o-- ReversePoland : New
+class ReversePoland [[java:ge_JavaP6.ReversePoland]] {
+	-isON: boolean
+	-listFormula: ArrayList<String>
+	+ReversePoland()
+	+start(): void
+	+validExpression(sArrayFormula: String[]): boolean
+	+displey_listFormula(): void
+}
+class User {
+}
+ReversePoland o-- User : New
+class Calculator {
+}
+ReversePoland o-- Calculator : New
+class User [[java:ge_JavaP6.User]] {
+	-scanner: Scanner
+	+User()
+	+formula_entry(): String[]
+}
+@enduml
